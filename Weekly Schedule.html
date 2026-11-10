@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Weekly Schedule</title>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@500;700;900&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#07070d;--ink:#f3f3fb;--card:#121220;--pink:#ff2e9a;--green:#39ff8f;--yellow:#fff94d;--sky:#4fd9ff;--purp:#9b6bff;--loo:#ff5fae;--shadow:#000;--line:#2a2a3d;
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:light){:root:not([data-theme="dark"]){--bg:#f1f0ff;--ink:#0b0b14;--card:#fff;--line:#d8d4ff;--shadow:#0b0b14}}
+:root[data-theme="light"]{--bg:#f1f0ff;--ink:#0b0b14;--card:#fff;--line:#d8d4ff;--shadow:#0b0b14}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*{box-sizing:border-box}
+body{margin:0;background:
+  radial-gradient(circle at 15% 10%, rgba(255,46,154,.18), transparent 40%),
+  radial-gradient(circle at 85% 20%, rgba(79,217,255,.16), transparent 40%),
+  radial-gradient(circle at 50% 90%, rgba(57,255,143,.12), transparent 45%),
+  var(--bg);
+  color:var(--ink);font-family:'Inter',sans-serif;font-weight:600}
+h1,h2,.brand{font-family:'Anton',Impact,sans-serif;font-weight:400;letter-spacing:.5px}
+main{max-width:1200px;margin:0 auto;padding:16px}
+.hero{background:var(--card);border:3px solid var(--line);border-radius:20px;padding:26px 20px;margin:14px 0 26px;text-align:center;position:relative;overflow:hidden}
+.hero::before{content:"";position:absolute;inset:0;background:repeating-linear-gradient(135deg,rgba(255,255,255,.02) 0 2px,transparent 2px 10px);pointer-events:none}
+.eyebrow{display:inline-block;background:var(--yellow);color:#101010;font-family:'Anton';font-size:13px;padding:4px 12px;border-radius:999px;transform:rotate(-2deg);margin-bottom:10px}
+.glitch{font-size:clamp(34px,8vw,68px);margin:0;line-height:.95;color:var(--ink);text-shadow:3px 3px 0 var(--pink),-3px -3px 0 var(--sky);animation:jit 5s infinite}
+@keyframes jit{0%,92%,100%{text-shadow:3px 3px 0 var(--pink),-3px -3px 0 var(--sky)}93%{text-shadow:-4px 2px 0 var(--green),4px -2px 0 var(--purp)}95%{text-shadow:2px -3px 0 var(--pink),-2px 3px 0 var(--sky)}}
+.sub{font-family:'Anton';font-size:clamp(14px,2.6vw,20px);color:var(--pink);margin-top:8px}
+.hero p{margin:14px auto 0;max-width:620px;font-weight:700;font-size:15px;opacity:.9}
+.chips{margin-top:14px;display:flex;flex-wrap:wrap;gap:8px;justify-content:center}
+.chip{background:#1b1b2c;border:2px solid var(--line);color:var(--green);font-family:'Anton';font-size:12px;padding:5px 12px;border-radius:999px}
+:root[data-theme="light"] .chip{background:#efe9ff;color:#7a2fb3}
+.tools{display:flex;gap:10px;flex-wrap:wrap;justify-content:center;margin:0 0 18px}
+button{font-family:'Anton';letter-spacing:.3px;font-size:14px;cursor:pointer;background:var(--pink);color:#0a0a0a;border:none;border-radius:10px;padding:10px 16px;box-shadow:0 0 0 2px var(--shadow),3px 3px 0 var(--sky);transition:transform .12s}
+button:nth-of-type(2){background:var(--green)}
+button:nth-of-type(3){background:var(--yellow)}
+button:nth-of-type(4){background:var(--sky)}
+button:active{transform:translate(2px,2px);box-shadow:0 0 0 2px var(--shadow),1px 1px 0 var(--sky)}
+button:focus-visible,td:focus-visible{outline:3px solid var(--purp);outline-offset:2px}
+#quote{font-family:'Inter';font-weight:800;color:var(--ink)}
+h2{font-family:'Anton';font-size:clamp(22px,4vw,32px);margin:34px 0 10px;color:var(--ink)}
+h2 span{color:var(--pink)}
+.wrap{overflow-x:auto;border:3px solid var(--line);border-radius:18px;background:var(--card)}
+table{border-collapse:separate;border-spacing:0;width:100%;min-width:900px}
+th,td{padding:9px 8px;font-size:13px;border-right:1px solid var(--line);border-bottom:1px solid var(--line);vertical-align:top;text-align:left}
+th{background:#1b1b2c;font-family:'Anton';font-weight:400;font-size:15px;position:sticky;top:0;color:var(--sky);z-index:2}
+:root[data-theme="light"] th{background:#e9e4ff;color:#5a2bc9}
+th.today{background:var(--pink);color:#0a0a0a}
+td.t{position:sticky;left:0;background:var(--card);font-family:'Anton';font-weight:400;white-space:nowrap;z-index:1;border-right:2px solid var(--line);color:var(--yellow)}
+th:first-child{left:0;z-index:3;position:sticky}
+td.today{box-shadow:inset 0 0 0 2px var(--pink)}
+td.wc{background:rgba(255,46,154,.14);cursor:pointer;font-weight:800;color:var(--ink)}
+td.wc:hover{background:rgba(255,46,154,.26)}
+td.sleep{background:rgba(79,217,255,.14)}
+td.meal{background:rgba(57,255,143,.14)}
+.clsbadge{display:inline-block;font-family:'Anton';font-size:11px;background:var(--sky);color:#06202b;padding:2px 7px;border-radius:6px;margin-bottom:4px}
+.filler{opacity:.55;font-size:12.5px}
+.pop{animation:pop .4s}
+@keyframes pop{30%{transform:scale(1.18) rotate(-4deg)}60%{transform:scale(.96) rotate(3deg)}}
+.cnt{position:fixed;right:max(12px,env(safe-area-inset-right,0px));bottom:calc(12px + env(safe-area-inset-bottom,0px));background:var(--card);color:var(--ink);border:2px solid var(--line);border-radius:14px;padding:10px 14px;box-shadow:3px 3px 0 var(--pink);z-index:5;max-width:230px;font-size:13px;font-weight:700}
+.cnt b{font-family:'Anton';color:var(--yellow);font-size:16px}
+.meals{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:14px}
+.day{background:var(--card);border:2px solid var(--line);border-radius:16px;padding:14px;position:relative}
+.day::after{content:"";position:absolute;top:10px;right:10px;width:8px;height:8px;border-radius:50%;background:var(--green);box-shadow:0 0 8px var(--green)}
+.day h3{margin:0 0 8px;font-size:19px;font-family:'Anton';color:var(--pink)}
+.day p{margin:6px 0;font-size:13.5px}
+.tag{font-family:'Anton';font-size:10.5px;color:#0a0a0a;background:var(--yellow);border-radius:6px;padding:1px 6px;margin-right:6px}
+.rules{background:var(--card);border:2px solid var(--line);border-radius:16px;padding:16px 16px 16px 34px}
+.rules li{margin:10px 0;font-size:14px}
+footer{text-align:center;margin:34px 0 76px;font-family:'Anton';font-size:12px;opacity:.6;letter-spacing:.5px}
+@media (prefers-reduced-motion:reduce){.glitch,.pop{animation:none}}
+</style>
+</head>
+<body>
+<main>
+<header class="hero">
+  <span class="eyebrow">an officially ratified Ohio-tier schedule 💀</span>
+  <h1 class="glitch">WEEKLY SCHEDULE</h1>
+  <div class="sub">Sheldon Cooper Optimal Routine™ — patched v2026.7, now 6000% more unhinged</div>
+  <p>This is not a vibe — it is a formally adopted system. Any deviation shall be classified as emotional damage. The bladder now operates under a government-approved timetable, and so, by extension, do you. Ratio-proof. Mother-tested. Bazinga-pilled, by decree. 🚽🧠</p>
+  <div class="chips">
+    <span class="chip">rizz: theoretical</span>
+    <span class="chip">sigma grindset: scheduled</span>
+    <span class="chip">fr fr no cap</span>
+    <span class="chip">mewing during physics</span>
+    <span class="chip">Gloria supremacy 👑</span>
+  </div>
+</header>
+
+<div class="tools">
+  <button id="jump">📍 TELEPORT TO TODAY</button>
+  <button id="share">🔗 SEND TO A FRIEND (or enemy)</button>
+  <button id="sayings">🎤 UNHINGED SHELDON QUOTE</button>
+  <button id="theme">🌗 SWAP DIMENSION</button>
+  <div id="quote" class="sticker" style="display:none;width:100%;text-align:center;background:var(--card);border:2px solid var(--line);border-radius:14px;padding:10px" role="status"></div>
+</div>
+
+<h2>🗓️ THE <span>TIMETABLE</span> (tap the pink ones, it's giving bathroom)</h2>
+<p style="max-width:640px;font-size:13.5px;opacity:.8;margin:-4px 0 14px">blue tags are real classes, mandatory, non-negotiable. everything else is just Sheldon's law.</p>
+<div class="wrap" role="region" aria-label="Weekly timetable" tabindex="0"><table id="tt"></table></div>
+
+<h2>🍜 THE SACRED <span>MEAL PLAN</span> (do not touch the sequence)</h2>
+<div class="meals" id="meals"></div>
+
+<h2>📜 ROOMMATE AGREEMENT <span>(binding, notarized, zero amendments)</span></h2>
+<ul class="rules">
+  <li>🛋️ Article I: That spot is mine, by precedent and by right. Occupying it shall be treated as an act of civil unrest.</li>
+  <li>🚽 Article II: Bathroom breaks are scheduled to the minute. Spontaneous urges shall be filed under "cope" and disregarded accordingly.</li>
+  <li>🐱 Article III: Soft kitty, warm kitty is mandatory at 22:00, without exception, negotiation, or excuse.</li>
+  <li>🍽️ Article IV: Food touching other food constitutes a formal violation. Peas and potatoes shall remain, by treaty, permanently estranged.</li>
+  <li>📵 Article V: Spontaneity, "vibes," and unscheduled fun require written submission 48 hours in advance, pending peer review.</li>
+  <li>💀 Article VI: Use of the phrase "it's giving" without irony, in proximity to the whiteboard, shall be met with the Vulcan death grip, Spock-style.</li>
+</ul>
+<footer>engineered in a laboratory · chill: 0% · bazinga: 100% · touch-grass schedule pending Q3 review</footer>
+</main>
+<div class="cnt" id="cnt"><b id="n">0</b> flushes logged<br><span id="msg">tap a pink cell, coward</span></div>
+
+<script>
+var D=['Mon','Tue','Wed','Thu','Fri','Sat','Sun'];
+var rows=[
+['06:15','Wake up. Knock ×3 on my own door 🚪 (a mandatory, pre-ratified ritual)',null,'s'],
+['06:30','🚽 Break #1 — the bladder arc begins',null,'w'],
+['06:45',['🥣 Cereal, ranked, no cap','🥣 Cereal, ranked, no cap','🥣 Cereal, ranked, no cap','🥣 Cereal, ranked, no cap','🥣 Cereal, ranked, no cap','🥞 Pancakes (grid-cut, sigma style)','🥣 Cereal + doomscroll news'],'m'],
+['07:30','🪥 Teeth, shower, main character lighting ✨',null,''],
+['08:00',['🔬 Physics (string theory, obviously)','<span class="clsbadge">🎓 LECTURE</span><br>Andrea S. Chan · 05-G001','<span class="clsbadge">🧪 LAB</span><br>Gloria E. Liew · 02-C403','🔬 Physics + whiteboard rizz','<span class="clsbadge">📘 TUTORIAL</span><br>VieMing Tan · 02-G509','🧺 Laundry, 8:15 sharp, chop chop','🧘 Rest-day rant: none (suspicious)'],''],
+['10:00',['<span class="filler">🫡 free period, aura regenerating</span>','<span class="clsbadge">🎓 LECTURE</span><br>Lorna S. Liew · 02-G001','<span class="filler">😮‍💨 no class, cope</span>','<span class="filler">🫡 free period, aura regenerating</span>','<span class="filler">😮‍💨 no class, cope</span>','<span class="filler">🧺 more laundry, allegedly</span>','<span class="filler">🛌 still asleep, no shame</span>'],''],
+['10:30','🚽 Break #2 — hydration confirmed, fellas',null,'w'],
+['12:00',['🍱 Lunch: Thai leftovers','🍕 Lunch: pizza crust integrity test','🌮 Lunch: burrito bowl situation','🥡 Lunch: noodles, slurped loudly','🍣 Lunch: sushi bits','🥪 Lunch: laundry sandwich (don\u2019t ask)','🍝 Lunch: pasta, perfectly circular'],'m'],
+['13:30','🚽 Break #3 — post-lunch system flush',null,'w'],
+['14:00',['<span class="clsbadge">🎓 LECTURE</span><br>VieMing Tan · 01-B004','📝 Write paper, mog Leonard','🧠 Deep thoughts, zero rizz required','<span class="clsbadge">📘 TUTORIAL</span><br>Lorna S. Liew · 06-C505','🧠 Deep thoughts, zero rizz required','🧺 Fold. Fold again. Fold forever.','🎻 Violin practice (tragic, unskippable)'],''],
+['15:00',['<span class="filler">🫡 free period, aura regenerating</span>','<span class="clsbadge">🎓 LECTURE</span><br>Gloria E. Liew · 01-L001','<span class="filler">🫡 free period, aura regenerating</span>','<span class="clsbadge">📘 TUTORIAL</span><br>Cassandra E. Lau · 07-G216','<span class="filler">😮‍💨 no class, cope</span>','<span class="filler">🧺 even more laundry</span>','<span class="filler">🛌 napping, world ending slowly</span>'],''],
+['16:00','🚽 Break #4 — the bladder does not negotiate, chat',null,'w'],
+['17:00',['📺 Fun with Flags LIVE, no talking during broadcast','🏃 Walk to the spot, claim territory','🦸 Comic store run, full lore check','🔭 Telescope, cosmic sigma hours','🎮 Halo, ratio the bots','🚂 Train model maintenance, serious business','🔬 Tiny unsanctioned science fair'],''],
+['18:30',['🍜 Thai Monday, mandatory','🍕 Pizza Tuesday, law of physics','🌮 Mexican Wednesday, spicy but scheduled','🥟 Chinese Thursday, dumpling count even','🍣 Sushi Friday, soy sauce x2 only','🧀 Cheesecake Saturday, my table, my rules','🍲 Soup Sunday, reset the simulation'],'m'],
+['19:30','🚽 Break #5 — the dinner reaction, as predicted',null,'w'],
+['20:00',['♟️ Chess club, I win, as foretold','🧩 Flag puzzles, Leonard not invited','🦸 Comic night, spoilers = unforgivable','👽 Star Trek rewatch, no commentary allowed','🎲 Game night, rules rewritten live on stream','📺 Doctor Who marathon, lore accurate','🎞️ Movie night, democratic vote overruled'],''],
+['21:30','🚽 Final break #6 — season finale, no spinoff',null,'w'],
+['22:00','🐱 Soft kitty, warm kitty… sleep mode activated 😴',null,'s']
+];
+var msgs=['flushed with 0 rizz, respect 💀','certified bathroom moment','bladder is him','that was scheduled, no cap','regular season, big numbers','sheldon approves, unprecedented','skibidi plumbing success 🚿','logged. no notes. no cap.','this is the way (bathroom edition)','ratio: you vs your bladder, you lost'];
+var n=0,tt=document.getElementById('tt');
+var today=(new Date().getDay()+6)%7;
+var h='<thead><tr><th>⏰ time</th>';
+D.forEach(function(d,i){h+='<th class="'+(i===today?'today':'')+'">'+d+(i===today?' 👈':'')+'</th>'});
+h+='</tr></thead><tbody>';
+rows.forEach(function(r){
+  h+='<tr><td class="t">'+r[0]+'</td>';
+  for(var i=0;i<7;i++){
+    var txt=Array.isArray(r[1])?r[1][i]:r[1];
+    var k=Array.isArray(r[1])?r[2]:r[3];
+    var cls=(k==='w'?'wc':k==='s'?'sleep':k==='m'?'meal':'')+(i===today?' today':'');
+    h+='<td class="'+cls+'"'+(k==='w'?' tabindex="0" role="button"':'')+'>'+txt+'</td>';
+  }
+  h+='</tr>';
+});
+tt.innerHTML=h+'</tbody>';
+function flush(c){n++;document.getElementById('n').textContent=n;
+  document.getElementById('msg').textContent=msgs[Math.floor(Math.random()*msgs.length)];
+  c.classList.remove('pop');void c.offsetWidth;c.classList.add('pop')}
+tt.addEventListener('click',function(e){var c=e.target.closest('td.wc');if(c)flush(c)});
+tt.addEventListener('keydown',function(e){if((e.key==='Enter'||e.key===' ')&&e.target.classList.contains('wc')){e.preventDefault();flush(e.target)}});
+var sayings=['I\u2019m not crazy, my mother had me tested. She confirmed: I\u2019m just built different. 🧪','Bazinga! ...that was the joke. Please clap. 🤓','That\u2019s my spot. It has optimal cushion density and zero rizz interference. 🛋️','Fun fact: you are late, and lateness is a personality flaw. 🕰️','Knock knock knock, Penny. Knock knock knock, Penny. Knock knock knock, Penny. 🚪','Please do not touch my whiteboard. It is lore-accurate and sacred. 📝','I don\u2019t need sleep, I need a laminated schedule and your silence. 😴','Vibes are not a valid unit of measurement. Try again with data. 📏','Aura: +1000. Social skills: still buffering. ⏳','This isn\u2019t brainrot, this is a peer-reviewed lifestyle. 🧠','Skibidi is not a word. It is, however, a lifestyle I respect from a distance. 🚽'];
+var qb=document.getElementById('quote');
+function say(t){qb.style.display='block';qb.textContent=t}
+document.getElementById('sayings').onclick=function(){say(sayings[Math.floor(Math.random()*sayings.length)])};
+document.getElementById('share').onclick=function(){
+  var u=location.href,d={title:'Weekly Schedule',text:'This is my weekly schedule. Toilet breaks included. No cap. 🚽',url:u};
+  if(navigator.share){navigator.share(d).catch(function(){})}
+  else if(navigator.clipboard){navigator.clipboard.writeText(u).then(function(){say('Link copied! Go ruin someone else\u2019s spontaneity. 📎')}).catch(function(){say('Copy the link from the address bar, chief. 📎')})}
+  else{say('Copy the link from the address bar, chief. 📎')}
+};
+var meals=[
+['Mon','🍜','Cereal, ranked','Pad thai (spot-adjacent)','Thai Monday: pad thai, mandatory','Mango sticky rice'],
+['Tue','🍕','Cereal, ranked','Pizza crust integrity test','Pizza, cut in perfect slices, no mercy','Gelato, 1 scoop, measured'],
+['Wed','🌮','Cereal, ranked','Burrito bowl situation','Tacos, nicely stacked, structurally sound','Churro (single, rationed)'],
+['Thu','🥟','Cereal, ranked','Cold sesame noodles','Dumplings, even numbers only, non-negotiable','Fortune cookie (fate pre-approved)'],
+['Fri','🍣','Cereal, ranked','Sushi bits','Sushi, soy sauce x2 dips exactly','Mochi, chewed responsibly'],
+['Sat','🧀','Pancakes, grid-cut','Laundry sandwich (iconic, don\u2019t ask)','Cheesecake Factory, my table, my throne','Cheesecake (obviously, duh)'],
+['Sun','🍲','Cereal + doomscroll','Pasta circle, geometrically correct','Soup, then more soup, then a nap','Pudding cup, chilled to spec']];
+var mh='';
+meals.forEach(function(m){mh+='<div class="day"><h3>'+m[1]+' '+m[0]+'</h3><p><span class="tag">AM</span>'+m[2]+'</p><p><span class="tag">NOON</span>'+m[3]+'</p><p><span class="tag">PM</span>'+m[4]+'</p><p><span class="tag">TREAT</span>'+m[5]+'</p></div>'});
+document.getElementById('meals').innerHTML=mh;
+document.getElementById('jump').onclick=function(){var t=tt.querySelector('th.today');if(t)t.scrollIntoView({behavior:'smooth',inline:'center',block:'nearest'})};
+document.getElementById('theme').onclick=function(){var r=document.documentElement,dark=r.dataset.theme?r.dataset.theme==='dark':!matchMedia('(prefers-color-scheme: light)').matches;r.dataset.theme=dark?'light':'dark'};
+</script>
+</body>
+</html>
